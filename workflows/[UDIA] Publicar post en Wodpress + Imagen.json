@@ -172,6 +172,29 @@
           "name": "vayesa"
         }
       }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b3576f38-c681-474f-a2da-fb8ad9487589",
+              "name": "test",
+              "value": "hola",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        260,
+        280
+      ],
+      "id": "a8f292b6-e813-4690-a839-550fe14d8dc1",
+      "name": "Edit Fields"
     }
   ],
   "pinData": {},
@@ -181,6 +204,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-02-09T10:15:23.000Z",
-  "versionId": "0da8a269-5c7d-4594-8ba6-02a071b60ebc"
+  "updatedAt": "2025-02-09T10:30:27.000Z",
+  "versionId": "50c6e7d6-35a7-4618-bc5b-9d3c08a8bdf4"
 }
