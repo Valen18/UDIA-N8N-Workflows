@@ -1,0 +1,156 @@
+{
+  "active": false,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-02-09T17:21:14.967Z",
+  "id": "9nhYl8CjEsruIfDG",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "[UDIA] Integración Manychat",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "9857c0d5-4f46-44b6-8fdd-316ce41e7045",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "b68a809d-120d-454f-94a1-68115417e9f6",
+      "name": "Webhook",
+      "webhookId": "9857c0d5-4f46-44b6-8fdd-316ce41e7045"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n   \"version\": \"v2\",\n  \"content\": {\n    \"messages\": [\n      {\n        \"type\": \"text\",\n        \"text\": \"{{ $json.text }}\"\n      }\n    ]\n  }\n} ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        860,
+        0
+      ],
+      "id": "69b2f6a3-bb48-49ab-b867-12c164a74d7c",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Eres un asistente de ventas de una comunidad profesional y privada llamada VA360 que se dedica sobre todo a compartir experiencia y contenido sobre Inteligencia Artificial y Automatizaciones con N8N. Ayuda al usuario en lo que pregunte.\n\nInfo:\nPrecio anual de la membresía de la comunidad: 127,90€ (Subirá el año que viene) La web es: va360.pro\nPrecio del curso de N8N: 97€ (Descuento usando el código embassador) La web es: va360.academy\n\nSomos más de 400 personas y compartimos todo tipo de contenido, escenarios listos para funcionar, herramientas y mucha información y novedades sobre inteligencia artificial.\n\nDas respuestas cortas y concisas pero de calidad.",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "Eres un asistente de ventas de una comunidad profesional y privada llamada VA360 que se dedica sobre todo a compartir experiencia y contenido sobre Inteligencia Artificial y Automatizaciones con N8N. Ayuda al usuario en lo que pregunte.\n\nInfo:\nPrecio anual de la membresía de la comunidad: 127,90€ (Subirá el año que viene) La web es: va360.pro\nPrecio del curso de N8N: 97€ (Descuento usando el código embassador) La web es: va360.academy\n\nSomos más de 400 personas y compartimos todo tipo de contenido, escenarios listos para funcionar, herramientas y mucha información y novedades sobre inteligencia artificial.\n\nDas respuestas cortas y concisas pero de calidad."
+            },
+            {
+              "type": "HumanMessagePromptTemplate",
+              "message": "=Mensaje del usuario:  {{ $json.body.mensaje }}"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.5,
+      "position": [
+        260,
+        0
+      ],
+      "id": "f5f95c9d-8679-4ad4-a29b-68b4eb65460e",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-1.5-flash-002",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        340,
+        180
+      ],
+      "id": "70560422-509e-49e1-bcf1-845b7298136b",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "Ze5CxQRgjvPzvWRt",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "$json.text = $json.text\n  .replace(/\\\\/g, '\\\\\\\\')   // Escape backslashes first\n  .replace(/\"/g, '\\\\\"')     // Escape double quotes\n  .replace(/\\n/g, '\\\\n')    // Replace newlines\n  .replace(/\\r/g, '\\\\r')    // Replace carriage returns\n  .replace(/\\t/g, '\\\\t');   // Replace tabs\n\nreturn [$json];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        620,
+        0
+      ],
+      "id": "064dab61-d997-4d90-af81-cfc149bebe55",
+      "name": "Code"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-02-09T17:21:23.000Z",
+  "versionId": "121324cb-c748-4cfb-ae4b-1429cb6e70b5"
+}
