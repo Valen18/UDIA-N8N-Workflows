@@ -1,0 +1,256 @@
+{
+  "active": false,
+  "connections": {
+    "VariablesIniciales": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        []
+      ]
+    },
+    "VariablesIniciales1": {
+      "main": [
+        [
+          {
+            "node": "VariablesIniciales2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "VariablesIniciales1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "VariablesIniciales2": {
+      "main": [
+        []
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "VariablesIniciales",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-02-07T10:10:55.076Z",
+  "id": "fCWtGwaxnsQnlihA",
+  "meta": null,
+  "name": "[UDIA] Mi primer workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3d3c5dfb-603f-458c-9eb0-3266f631f6c5",
+              "name": "language",
+              "value": "spanish",
+              "type": "string"
+            },
+            {
+              "id": "4fb98899-b599-464c-9a5c-b3592657fd36",
+              "name": "type",
+              "value": "article",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        320,
+        -120
+      ],
+      "id": "4338afff-3303-4102-bb03-bcd08abfd2b0",
+      "name": "VariablesIniciales"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "cfe4785b-b637-4a1d-92ed-8edd68d2786a",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        620,
+        100
+      ],
+      "id": "09c783cb-4a13-40c9-9f9a-b2f21c8a6e63",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3d3c5dfb-603f-458c-9eb0-3266f631f6c5",
+              "name": "language",
+              "value": "spanish",
+              "type": "string"
+            },
+            {
+              "id": "4fb98899-b599-464c-9a5c-b3592657fd36",
+              "name": "type",
+              "value": "article",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        760,
+        -120
+      ],
+      "id": "28dd9125-3119-4ea4-90b5-ca4d6ca8eb67",
+      "name": "VariablesIniciales1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3d3c5dfb-603f-458c-9eb0-3266f631f6c5",
+              "name": "language",
+              "value": "spanish",
+              "type": "string"
+            },
+            {
+              "id": "4fb98899-b599-464c-9a5c-b3592657fd36",
+              "name": "type",
+              "value": "article",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        980,
+        -120
+      ],
+      "id": "16a521c0-0ce8-468e-83d3-d66f5aa855d2",
+      "name": "VariablesIniciales2"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        540,
+        -120
+      ],
+      "id": "46e7d4cf-68f9-4c99-9397-7346a63c22d7",
+      "name": "Wait",
+      "webhookId": "ce352361-bfaf-4bce-988b-d3dd7e9b4ba5"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        320,
+        100
+      ],
+      "id": "92a325e3-236a-4cfb-9564-74b80d4c98d1",
+      "name": "Wait1",
+      "webhookId": "94c2ec8f-05a8-4834-93fd-3ee8b913f344"
+    },
+    {
+      "parameters": {
+        "public": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "97d90432-97e6-4741-9a64-f81d33367a93",
+      "name": "When chat message received",
+      "webhookId": "bc66c5db-7825-43d5-a2ba-436be8968147"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Madrid",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
+  "tags": [],
+  "triggerCount": 2,
+  "updatedAt": "2025-02-08T11:12:21.000Z",
+  "versionId": "66a54170-94b6-400d-96ea-d908b920e1c8"
+}
