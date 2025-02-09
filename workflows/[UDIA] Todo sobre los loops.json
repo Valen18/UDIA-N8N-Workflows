@@ -1,0 +1,321 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "RSS Read",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSS Read": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-02-09T16:05:14.747Z",
+  "id": "pW6yJ5ED2wbajnUl",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "[UDIA] Todo sobre los loops",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "e16fd481-3c19-4179-87f3-6e6f1de0075f",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://es.wired.com/feed/rss",
+        "options": {}
+      },
+      "id": "5c68e5b3-371d-4899-a531-0f7d51d7ab60",
+      "name": "RSS Read",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.1,
+      "position": [
+        100,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "batchSize": 3,
+        "options": {
+          "reset": false
+        }
+      },
+      "id": "5aea912d-50e7-4702-bfec-701ccfd8b962",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        460,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "12-sNewz4-OrTCQtMktwXjlG9_qTpEoL48bKnwsryzd8",
+          "mode": "list",
+          "cachedResultName": "[UDIA] Loops",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/12-sNewz4-OrTCQtMktwXjlG9_qTpEoL48bKnwsryzd8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1FesJBvsAX2hBFYSD6AxrtayUJPKECUaU7pHxrCrU3BE/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Titulo": "={{ $json.titulo_modificado }}",
+            "Descripcion": "={{ $('Loop Over Items').item.json.content }}",
+            "Autor": "={{ $('Loop Over Items').item.json.creator }}",
+            "Fecha": "={{ $('Loop Over Items').item.json.isoDate }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Titulo",
+              "displayName": "Titulo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Descripcion",
+              "displayName": "Descripcion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Autor",
+              "displayName": "Autor",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Fecha",
+              "displayName": "Fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "d6c50788-015a-40c8-aa46-5443a1ee93d8",
+      "name": "Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1320,
+        20
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Ks2uogHviko6gWFz",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2b278f35-6f3e-474a-a377-647baf03bcca",
+              "name": "titulo_modificado",
+              "value": "=UDIA: {{ $json.title }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "437f4a85-f337-480b-b5c0-c61c48b6313a",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1100,
+        20
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "442145169",
+        "text": "¡Loop completado!",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        860,
+        -100
+      ],
+      "id": "e7e49938-7eb3-4f4e-a66c-985aa0fbe7c2",
+      "name": "Telegram",
+      "webhookId": "4a63fbe8-48f9-4305-9b5a-dfd5336204ed",
+      "credentials": {
+        "telegramApi": {
+          "id": "6ybQlYC8zJyixQBM",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "7192c392-e72a-4019-9a47-4f7bc435bbfd",
+              "leftValue": "={{ $json.creator }}",
+              "rightValue": "Jorge Garay",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        260,
+        0
+      ],
+      "id": "925aedaa-243a-4c96-be7c-b24cfdba30b8",
+      "name": "Filter"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        660,
+        -100
+      ],
+      "id": "e02b5f43-9039-4636-9958-590ae3d48e63",
+      "name": "Limit"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-02-09T16:22:11.000Z",
+  "versionId": "48982a20-b29c-4d6f-89f0-add80ca72f17"
+}
