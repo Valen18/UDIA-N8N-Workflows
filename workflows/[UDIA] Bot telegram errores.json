@@ -1,0 +1,80 @@
+{
+  "active": false,
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-02-08T10:05:59.168Z",
+  "id": "LVXVUOYK56yp3A6i",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "[UDIA] Bot telegram errores",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -100,
+        -200
+      ],
+      "id": "95b43b24-b9e9-4bf3-995f-5a9b5655237d",
+      "name": "Telegram Trigger",
+      "webhookId": "0cfd0b1a-1d59-47f5-8824-f94ca593aae9",
+      "credentials": {
+        "telegramApi": {
+          "id": "6ybQlYC8zJyixQBM",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.message.chat.id }}",
+        "text": "=Eco: {{ $json.message.text }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        180,
+        -200
+      ],
+      "id": "1bcc1168-60b4-4ae3-9230-408ff2a3366b",
+      "name": "Telegram",
+      "webhookId": "dc1faf70-862a-4f50-8825-1f82c4a2e15d",
+      "credentials": {
+        "telegramApi": {
+          "id": "6ybQlYC8zJyixQBM",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-02-08T10:12:59.000Z",
+  "versionId": "2a017078-c9cc-4992-afe1-94960d30f71a"
+}
