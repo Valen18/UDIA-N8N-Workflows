@@ -1,0 +1,186 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Creo un post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Descargo la imagen": {
+      "main": [
+        [
+          {
+            "node": "Subo la imagen a Wordpress",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Creo un post": {
+      "main": [
+        [
+          {
+            "node": "Descargo la imagen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Subo la imagen a Wordpress": {
+      "main": [
+        [
+          {
+            "node": "Asigno imagen a post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-02-09T10:01:19.064Z",
+  "id": "MrERgk7ICBRpeGYm",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "[UDIA] Publicar post en Wodpress + Imagen",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "0d0414f7-fdba-4a66-991c-77e0397f56a4",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [
+        0,
+        0
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "url": "https://udia.es/_next/image?url=%2Fassets%2Fudia-2.webp&w=96&q=75",
+        "options": {}
+      },
+      "id": "d39bfb63-fa7f-471a-af11-12a19e5ea130",
+      "name": "Descargo la imagen",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        360,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "title": "Udia Test Post",
+        "additionalFields": {
+          "content": "Contenido del post",
+          "status": "draft",
+          "categories": "={{ 45,8 }}"
+        }
+      },
+      "id": "749e201d-c023-485c-8d80-a397b0e6bab7",
+      "name": "Creo un post",
+      "type": "n8n-nodes-base.wordpress",
+      "typeVersion": 1,
+      "position": [
+        180,
+        0
+      ],
+      "credentials": {
+        "wordpressApi": {
+          "id": "kGaTABOACuDFd3tl",
+          "name": "vayesa"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://vayesa.com/wp-json/wp/v2/media",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "wordpressApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "content-disposition",
+              "value": "=attachment; filename={{ $json.title.rendered }}.{{ $binary.data.fileExtension }}"
+            },
+            {
+              "name": "content-type",
+              "value": "={{ $binary.data.mimeType }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "data",
+        "options": {}
+      },
+      "id": "5163b69c-b4a9-4ed4-85f6-638f19149d1b",
+      "name": "Subo la imagen a Wordpress",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        560,
+        0
+      ],
+      "credentials": {
+        "wordpressApi": {
+          "id": "kGaTABOACuDFd3tl",
+          "name": "vayesa"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://vayesa.com/wp-json/wp/v2/posts/{{ $('Creo un post').item.json.id }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "wordpressApi",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "featured_media",
+              "value": "={{ $json.id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "435c4fbf-83f8-4fce-815e-e4d01eb8fc87",
+      "name": "Asigno imagen a post",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        720,
+        0
+      ],
+      "credentials": {
+        "wordpressApi": {
+          "id": "kGaTABOACuDFd3tl",
+          "name": "vayesa"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-02-09T10:15:23.000Z",
+  "versionId": "0da8a269-5c7d-4594-8ba6-02a071b60ebc"
+}
