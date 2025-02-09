@@ -1,0 +1,123 @@
+{
+  "active": true,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Stop and Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-02-08T11:12:29.868Z",
+  "id": "7w6XhbXFpnNujXH2",
+  "meta": null,
+  "name": "[UDIA] Control de errores",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -100,
+        -80
+      ],
+      "id": "331fa1f8-cf69-4ba2-9e26-45517e1caa90",
+      "name": "When chat message received",
+      "webhookId": "4bc76fec-80ba-4d1b-bda5-eab5f1a5a12e"
+    },
+    {
+      "parameters": {
+        "errorMessage": "¡Ha ocurrido un error! Te enviamos telegram"
+      },
+      "type": "n8n-nodes-base.stopAndError",
+      "typeVersion": 1,
+      "position": [
+        340,
+        -20
+      ],
+      "id": "dc39ac3f-3264-40ca-879c-64929db61a74",
+      "name": "Stop and Error"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "9ab8f1aa-a724-4a97-a55d-b03db30c4b73",
+              "leftValue": "={{ $json.chatInput }}",
+              "rightValue": "hola",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        120,
+        -80
+      ],
+      "id": "2108735b-a949-4a54-90f5-6215c5527ebe",
+      "name": "If"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        340,
+        -180
+      ],
+      "id": "8312b2a9-f5b0-4566-a281-7247387d7204",
+      "name": "No Operation, do nothing"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Madrid",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "9vc4ddIabIYiXbQv"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 2,
+  "updatedAt": "2025-02-08T11:18:19.000Z",
+  "versionId": "4e4334fa-c7e5-4bfe-b869-05b7b5371a74"
+}
