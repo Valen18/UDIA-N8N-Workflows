@@ -14,13 +14,7 @@
     },
     "OpenAI Chat Model": {
       "ai_languageModel": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Window Buffer Memory": {
@@ -36,10 +30,15 @@
     },
     "Pinecone Vector Store": {
       "ai_tool": [
+        []
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
         [
           {
             "node": "AI Agent",
-            "type": "ai_tool",
+            "type": "ai_languageModel",
             "index": 0
           }
         ]
@@ -89,7 +88,7 @@
       "typeVersion": 1.7,
       "position": [
         220,
-        0
+        -20
       ],
       "id": "f9f86885-9fbb-4226-9e0a-a6e9121d8ea8",
       "name": "AI Agent"
@@ -107,8 +106,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        100,
-        180
+        -40,
+        240
       ],
       "id": "a7a2687f-f270-45cf-9c76-0ceb4791e9a6",
       "name": "OpenAI Chat Model",
@@ -124,8 +123,8 @@
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.3,
       "position": [
-        260,
-        180
+        320,
+        240
       ],
       "id": "18467329-f24d-4ec5-81fd-be8075a9554c",
       "name": "Window Buffer Memory"
@@ -148,7 +147,7 @@
       "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
       "typeVersion": 1,
       "position": [
-        420,
+        500,
         180
       ],
       "id": "42814a24-0b37-4338-9f4f-e408d0a1c1ee",
@@ -164,11 +163,30 @@
       "parameters": {
         "options": {}
       },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        120,
+        180
+      ],
+      "id": "219d1023-03eb-4755-bcde-bc1e45fe0416",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "AmgAmQsGTju8phRW",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
       "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
       "typeVersion": 1.2,
       "position": [
-        460,
-        320
+        540,
+        360
       ],
       "id": "e04d908f-ea3a-4bd4-b28b-c7f4491e65b6",
       "name": "Embeddings OpenAI",
@@ -187,6 +205,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-02-08T17:48:01.000Z",
-  "versionId": "c02608ad-d22b-46cf-a02f-5ea15b55ae73"
+  "updatedAt": "2025-02-09T19:06:22.000Z",
+  "versionId": "f3e20020-3e73-4209-b93e-0f9d14dd7593"
 }
