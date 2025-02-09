@@ -1,0 +1,100 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "RSS Read",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSS Read": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-02-08T10:57:24.365Z",
+  "id": "rqJuYX9KWYfqTsqN",
+  "meta": null,
+  "name": "[UDIA] Nodo functions",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "5e015c94-8e07-410d-b2d9-e76797ca79e9",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -340,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://www.techradar.com/rss",
+        "options": {
+          "ignoreSSL": false
+        }
+      },
+      "id": "cf6a263e-8671-4378-b323-1c13bdf8e52b",
+      "name": "RSS Read",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.1,
+      "position": [
+        -160,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\n\nreturn items.map(item => {\n    const newItem = { ...item.json };\n    \n    if (newItem.enclosure && newItem.enclosure.url) {\n        newItem.image = newItem.enclosure.url;\n    }\n    \n    return { json: newItem };\n});\n"
+      },
+      "id": "1e2708ee-fdad-4cf8-ab7b-8ec4c172017d",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\n\nreturn items.map(item => {\n    const newItem = { ...item.json };\n    \n    if (newItem.title && newItem.title.toLowerCase().includes(\"open source\")) {\n        newItem.title = `UDIA: ${newItem.title}`;\n    }\n    \n    return { json: newItem };\n});\n"
+      },
+      "id": "3e737c9f-2023-4fdb-a0e5-7157e537a7ef",
+      "name": "Code1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        0,
+        180
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-02-08T11:10:50.000Z",
+  "versionId": "600ff076-a4e6-44a0-aefd-fe6942efea17"
+}
