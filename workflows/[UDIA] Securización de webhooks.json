@@ -1,0 +1,69 @@
+{
+  "active": false,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-02-08T11:54:07.193Z",
+  "id": "fpDsKNz0kI4yD5Xy",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "[UDIA] Securización de webhooks",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "udiasecurity",
+        "authentication": "jwtAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "18344cab-50e4-4f1e-9be2-c79a144745a8",
+      "name": "Webhook",
+      "webhookId": "5abdc827-2967-4e95-9e4b-1ade10028e62",
+      "credentials": {
+        "jwtAuth": {
+          "id": "th2Kr1Ysig1R1yx3",
+          "name": "JWT Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        220,
+        0
+      ],
+      "id": "9246a3c3-3c17-4fbc-a166-798953a38e9d",
+      "name": "AI Agent"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-02-08T12:09:07.000Z",
+  "versionId": "3114167b-4001-4f13-90d8-c6b7acb5f95e"
+}
