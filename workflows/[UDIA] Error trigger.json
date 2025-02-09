@@ -1,0 +1,68 @@
+{
+  "active": false,
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-02-08T11:12:47.842Z",
+  "id": "9vc4ddIabIYiXbQv",
+  "meta": null,
+  "name": "[UDIA] Error trigger",
+  "nodes": [
+    {
+      "parameters": {
+        "chatId": "442145169",
+        "text": "=Error:  {{ $json.execution.error.message }}\n\nÚltimo nodo ejecutado: {{ $json.execution.lastNodeExecuted }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        220,
+        -60
+      ],
+      "id": "952c98cb-0370-4e9d-94c3-85b62ae91e12",
+      "name": "Telegram",
+      "webhookId": "7797cad6-9678-42c4-a873-ced82ca082d1",
+      "credentials": {
+        "telegramApi": {
+          "id": "6ybQlYC8zJyixQBM",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        -60
+      ],
+      "id": "a7c823bf-99f3-48d1-be5e-924fbed1c10f",
+      "name": "Error Trigger"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Madrid",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-02-08T11:19:32.000Z",
+  "versionId": "0aa8556f-b9d3-4120-a393-ce7c2de3dc10"
+}
